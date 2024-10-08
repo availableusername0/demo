@@ -127,7 +127,8 @@ def get_data(path: str, profile: str, key, type_of_data):
         if type_of_data['decrypt']:
             for i in range(len(row)):
                 if isinstance(row[i], bytes) and row[i]:
-                    row[i] = decrypt_password(row[i], key)
+                    passwd = decrypt_password(row[i], key)
+                    row[i] = passwd[:2]+b"*"*(len(passwd)-2)
         if data_type_name == 'history':
             if row[2] != 0:
                 row[2] = convert_chrome_time(row[2])
